@@ -9,3 +9,8 @@ class Todo(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
 
+
+class TodoImage(models.Model):
+    todo = models.ForeignKey(Todo, related_name="todo_image", on_delete=models.PROTECT)
+    image = models.FileField(upload_to='image')
+

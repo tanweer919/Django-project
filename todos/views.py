@@ -2,6 +2,7 @@ from rest_framework import generics, views, status
 from todos.models import Todo
 from todos.serializers import TodoSerializer
 from rest_framework.response import Response
+from  rest_framework.permissions import AllowAny
 
 class TodosRetrieveView(generics.ListAPIView):
 
@@ -19,6 +20,7 @@ class CreateTodoView(generics.CreateAPIView):
 
 class TodoRetrieveView(generics.RetrieveAPIView):
 
+    permission_classes = (AllowAny,)
     serializer_class = TodoSerializer
     queryset = Todo.objects.all()
     lookup_field = 'id'
