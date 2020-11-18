@@ -18,10 +18,19 @@ class TodoImageSerializer(serializers.ModelSerializer):
 
 class TodoSerializer(serializers.ModelSerializer):
 
-    todo_images = TodoImageSerializer(source="todo_image", many=True)
+    todo_images = TodoImageSerializer(source="todo_image", many=True, read_only=True)
+
     class Meta:
         model = Todo
-        read_only_fields = ("id", "createdAt", "updatedAt")
+        read_only_fields = ("id", "createdAt", "updatedAt",  "completed")
         fields = ("id", "title", "description", "completed", "createdAt", "updatedAt", "todo_images")
+
+    def create(self, validated_data):
+        todo = Todo(account=self.context.get('request').user, **validated_data)
+        todo.save()
+        return todo
+
+
+
 
 
