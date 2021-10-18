@@ -3,6 +3,7 @@ from todos.models import Todo, TodoImage
 
 
 class TodoImageSerializer(serializers.ModelSerializer):
+    
     image_url = serializers.SerializerMethodField(method_name='get_image_url')
 
     def get_image_url(self, todoImage):
