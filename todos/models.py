@@ -3,6 +3,7 @@ import sys
 from account.models import Account
 
 class Todo(models.Model):
+    
     account = models.ForeignKey(Account, on_delete=models.PROTECT)
     title:str = models.CharField(max_length=101)
     description:str = models.CharField(max_length=201, null=True, blank=True)
